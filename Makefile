@@ -23,7 +23,8 @@ manifest:
 
 environment:
 	poetry install --no-root
-	$(POETRY_ACTIVATE) pangeo-workflow-examples 
+	cp -f /etc/eodag/eodag.yml ${HOME}/.config/eodag/eodag.yml
+	$(POETRY_ACTIVATE) pangeo-workflow-examples
 	python -m ipykernel install --user --name pangeo-workflow-examples --display-name "pangeo-workflow-examples"
 	@echo -e "poetry environment is ready."
 
