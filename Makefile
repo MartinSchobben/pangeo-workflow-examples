@@ -1,8 +1,7 @@
 .ONESHELL:
 SHELL = /bin/bash
 .PHONY: help clean install environment test version dist
-
-POETRY_ENV_DIR = $(shell poetry env info)
+POETRY_ACTIVATE = source $$(poetry env info --path)/bin/activate
 
 help:
 	@echo "make clean"
@@ -24,9 +23,8 @@ manifest:
 
 environment:
 	poetry install --no-root
-	source $(shell poetry env info --path)/bin/activate
+	$(POETRY_ACTIVATE) pangeo-workflow-examples 
 	python -m ipykernel install --user --name pangeo-workflow-examples --display-name "pangeo-workflow-examples"
-	jupyter kernelspec list
 	@echo -e "poetry environment is ready."
 
 jupyter:
