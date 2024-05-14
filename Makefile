@@ -17,16 +17,16 @@ clean:
 manifest:
 	@echo "creating new base pangeo-workflow-examples poetry environment..."
 	poetry init -n
-	poetry add ipykernel jupyterlab nbgrader nbgitpuller --group dev 
-	poetry add eodag
+	poetry add jupyterlab nbgrader nbgitpuller --group dev 
+	poetry add ipykernel eodag
 	@echo "... finished."
 
-environment:
-	poetry install --no-root
-	cp -f /etc/eodag/eodag.yml ${HOME}/.config/eodag/eodag.yml
+kernel:
+	poetry install --no-root --only main
 	$(POETRY_ACTIVATE) pangeo-workflow-examples
+	poetry run cp -f /tmp/eodag.yml ${HOME}/.config/eodag/eodag.yml
 	python -m ipykernel install --user --name pangeo-workflow-examples --display-name "pangeo-workflow-examples"
-	@echo -e "poetry environment is ready."
+	@echo -e "poetry jupyter kernel is ready."
 
 jupyter:
 	jupyter lab .
