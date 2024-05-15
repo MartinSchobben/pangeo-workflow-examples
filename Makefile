@@ -19,13 +19,6 @@ help:
 clean:
 	rm --force --recursive .ipynb_checkpoints/
 
-manifest:
-	@echo "creating new base pangeo-workflow-examples poetry environment..."
-	poetry init -n
-	poetry add jupyterlab nbgrader nbgitpuller --group dev 
-	poetry add ipykernel eodag
-	@echo "... finished."
-
 develop:
 	poetry install
 	$(POETRY_ACTIVATE) pangeo-workflow-examples
@@ -39,5 +32,5 @@ kernel:
 	python -m ipykernel install --user --name pangeo-workflow-examples --display-name "pangeo-workflow-examples"
 	@echo -e "poetry jupyter kernel is ready."
 
-jupyter:
+jupyter: kernel develop
 	jupyter lab .
