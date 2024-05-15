@@ -21,8 +21,13 @@ manifest:
 	poetry add ipykernel eodag
 	@echo "... finished."
 
+develop:
+	poetry install
+	$(POETRY_ACTIVATE) pangeo-workflow-examples
+	@echo -e "poetry development environment is ready."
+
 kernel:
-	poetry install --no-root --only main
+	poetry install --only main
 	$(POETRY_ACTIVATE) pangeo-workflow-examples
 	poetry run cp -f /tmp/eodag.yml ${HOME}/.config/eodag/eodag.yml
 	python -m ipykernel install --user --name pangeo-workflow-examples --display-name "pangeo-workflow-examples"
