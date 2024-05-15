@@ -30,6 +30,7 @@ kernel:
 	poetry install --only main
 	$(POETRY_ACTIVATE) pangeo-workflow-examples
 	poetry run cp -f /tmp/eodag.yml ${HOME}/.config/eodag/eodag.yml
+	poetry run cp -f /tmp/providers.yml $(shell poetry env info --path)/lib/python3.10/site-packages/eodag/resources/providers.yml
 	python -m ipykernel install --user --name pangeo-workflow-examples --display-name "pangeo-workflow-examples"
 	@echo -e "poetry jupyter kernel is ready."
 
