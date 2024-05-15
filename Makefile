@@ -27,10 +27,10 @@ develop:
 	mamba install -y -c conda-forge nbgitpuller jupyterlab eodag ipykernel 
 
 publish:
-	conda env export | grep -v "^prefix: " > pangeo-workflow-examples.yml
+	mamba env export | grep -v "^prefix: " > pangeo-workflow-examples.yml
 
 kernel:
-	conda env create -n eonenv --file pangeo-workflow-examples.yml
+	mamba env create -n pangeo-workflow-examples --file pangeo-workflow-examples.yml
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
 	cp -f /tmp/eodag.yml ${HOME}/.config/eodag/eodag.yml
 	cp -f /tmp/providers.yml $(EODAG_PATH)/lib/python3.10/site-packages/eodag/resources/providers.yml
