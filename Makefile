@@ -3,7 +3,7 @@ SHELL = /bin/bash
 .PHONY: help clean install environment test version dist
 CONDA_ENV_DIR = $(shell conda info --base)/envs/<pkg-name>
 CONDA_ACTIVATE = source $$(conda info --base)/etc/profile.d/conda.sh ; conda activate ; conda activate
-EODAG_PATH = $$(poetry env info --path)
+EODAG_PATH = $$(python -m pip show eodag | grep Location: | sed 's/^Location: //')
 
 help:
 	@echo "make clean"
@@ -33,7 +33,7 @@ kernel:
 	mamba env create -n pangeo-workflow-examples --file pangeo-workflow-examples.yml
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
 	cp -f /tmp/eodag.yml ${HOME}/.config/eodag/eodag.yml
-	cp -f /tmp/providers.yml $(EODAG_PATH)/lib/python3.10/site-packages/eodag/resources/providers.yml
+	cp -f /tmp/providers.yml $(EODAG_PATH)/eodag/resources/providers.yml
 	python -m ipykernel install --user --name pangeo-workflow-examples
 	@echo -e "conda jupyter kernel is ready."
 
