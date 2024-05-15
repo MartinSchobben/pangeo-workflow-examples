@@ -27,6 +27,7 @@ develop:
 	mamba install -y -c conda-forge nbgitpuller jupyterlab eodag ipykernel 
 
 publish:
+	$(CONDA_ACTIVATE) pangeo-workflow-examples
 	mamba env export | grep -v "^prefix: " > pangeo-workflow-examples.yml
 
 kernel:
