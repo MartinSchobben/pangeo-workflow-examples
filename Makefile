@@ -28,7 +28,7 @@ develop:
 
 publish:
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
-	mamba env export | grep -v "^prefix: " > pangeo-workflow-examples.yml
+	mamba env export | grep -v "^prefix: " > environment.yml
 
 kernel:
 	mamba env create -n pangeo-workflow-examples --file pangeo-workflow-examples.yml
