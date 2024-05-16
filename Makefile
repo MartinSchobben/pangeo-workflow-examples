@@ -28,7 +28,7 @@ develop:
 
 publish:
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
-	mamba env export | grep -v "^prefix: " > environment.yml
+	mamba env export  --from-history | grep -ve "^prefix:" -ve "jupyterlab" -ve "nbgitpuller" > environment.yml
 
 kernel:
 	mamba env create -n pangeo-workflow-examples --file pangeo-workflow-examples.yml
