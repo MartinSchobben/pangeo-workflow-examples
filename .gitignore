@@ -53,3 +53,5 @@ venv
 
 # make file markers
 .install*
+
+.ipynb_checkpoints/
