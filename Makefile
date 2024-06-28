@@ -23,7 +23,7 @@ clean:
 $(CONDA_ENV_DIR):
 	if ! { conda env list | grep 'pangeo-workflow-examples'; } >/dev/null 2>&1; then
 		@echo "creating new base pangeo-workflow-examples conda environment..."
-		conda create -y -c conda-forge -n pangeo-workflow-examples python=3.10 pip mamba
+		conda create -y -c conda-forge -n pangeo-workflow-examples python=3.10 pip mamba ipykernel
 		pip install eodag
 		mamba env update --file environment.yml --prune
 	fi;
