@@ -7,8 +7,9 @@ dependencies:
   - python=3.10
   - ca-certificates
   - certifi
-  - eodag
   - ipykernel
   - openssl
   - odc-stac
   - pystac-client
+  - pip:
+    -eodag
