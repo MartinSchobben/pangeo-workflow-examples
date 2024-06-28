@@ -1,4 +1,4 @@
-name: base
+name: pangeo-workflow-examples
 channels:
   - defaults
 dependencies:
@@ -12,3 +12,5 @@ dependencies:
   - openssl
   - odc-stac
   - pystac-client
+  - pip:
+    - eodag
