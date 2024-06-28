@@ -1,7 +1,7 @@
 .ONESHELL:
 SHELL = /bin/bash
 .PHONY: help clean install environment test version dist
-CONDA_ENV_DIR = $(shell conda info --base)/envs/<pkg-name>
+CONDA_ENV_DIR = $(shell conda info --base)/envs/pangeo-workflow-examples
 CONDA_ACTIVATE = source $$(conda info --base)/etc/profile.d/conda.sh ; conda activate ; conda activate
 EODAG_PATH = $$(python -m pip show eodag | grep Location: | sed 's/^Location: //')
 
