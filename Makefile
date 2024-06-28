@@ -23,7 +23,8 @@ clean:
 $(CONDA_ENV_DIR):
 	if ! { conda env list | grep 'pangeo-workflow-examples'; } >/dev/null 2>&1; then
 		@echo "creating new base pangeo-workflow-examples conda environment..."
-		conda create -y -c conda-forge -n pangeo-workflow-examples python=3.10 pip mamba eodag
+		conda create -y -c conda-forge -n pangeo-workflow-examples python=3.10 pip mamba
+		pip install eodag
 	fi;
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
 
@@ -34,9 +35,9 @@ environment: $(CONDA_ENV_DIR)
 
 publish:
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
-	mamba env export  --from-history | grep -ve "^prefix:" -ve "jupyter" -ve "nbgitpuller" -ve "eodag" -ve "mamba" -ve "pip" > environment.yml
+	mamba env export  --from-history | grep -ve "^prefix:" -ve "jupyter" -ve "nbgitpuller" -ve "eodag" > environment.yml
 
-kernel:
+kernel: environment
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
 	cp -f /tmp/eodag.yml ${HOME}/.config/eodag/eodag.yml
 	cp -f /tmp/providers.yml $(EODAG_PATH)/eodag/resources/providers.yml
