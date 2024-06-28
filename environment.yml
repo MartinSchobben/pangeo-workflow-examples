@@ -1,16 +1,13 @@
+name: pangeo-workflow-examples
 channels:
   - defaults
-  - conda-forge
 dependencies:
-  - python=3.10
-  - pip
   - mamba
-  - ipykernel
+  - pip
+  - python=3.10
   - ca-certificates
   - certifi
   - ipykernel
   - openssl
   - odc-stac
   - pystac-client
-  - pip:
-    - eodag
