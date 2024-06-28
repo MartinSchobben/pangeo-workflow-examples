@@ -37,7 +37,7 @@ publish:
 kernel: environment
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
 	cp -f /tmp/eodag.yml ${HOME}/.config/eodag/eodag.yml
-	cp -f /tmp/providers.yml $(EODAG_PATH)/eodag/resources/providers.yml
+	python -m pip install eodag && cp -f /tmp/providers.yml $(EODAG_PATH)/eodag/resources/providers.yml
 	python -m ipykernel install --user --name pangeo-workflow-examples
 	@echo -e "conda jupyter kernel is ready."
 

@@ -11,5 +11,3 @@ dependencies:
   - openssl
   - odc-stac
   - pystac-client
-  - pip:
-    - eodag
