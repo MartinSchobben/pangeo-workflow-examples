@@ -25,13 +25,12 @@ $(CONDA_ENV_DIR):
 		@echo "creating new base pangeo-workflow-examples conda environment..."
 		conda create -y -c conda-forge -n pangeo-workflow-examples python=3.10 pip mamba
 		pip install eodag
+		mamba env update --file environment.yml --prune
 	fi;
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
 
 environment: $(CONDA_ENV_DIR)
 	@echo -e "conda environment is ready. To activate use:\n\tconda activate pangeo-workflow-examples"
-	$(CONDA_ACTIVATE) pangeo-workflow-examples
-	mamba env update --file environment.yml --prune
 
 publish:
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
