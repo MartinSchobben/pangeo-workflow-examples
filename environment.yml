@@ -12,4 +12,4 @@ dependencies:
   - odc-stac
   - pystac-client
   - pip:
-    -eodag
+    - eodag
