@@ -23,7 +23,7 @@ clean:
 $(CONDA_ENV_DIR):
 	if ! { conda env list | grep 'pangeo-workflow-examples'; } >/dev/null 2>&1; then
 		@echo "creating new base pangeo-workflow-examples conda environment..."
-		conda create -y -c conda-forge --name pangeo-workflow-examples --file environment.yml
+		conda create -y -c conda-forge -n pangeo-workflow-examples --file environment.yml
 		pip install eodag
 	fi;
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
