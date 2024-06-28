@@ -1,13 +1,11 @@
 name: base
 channels:
   - defaults
-  - conda-forge
 dependencies:
-  - pip
   - python=3.10
-  - mamba
-  - eodag
-  - ipykernel
   - ca-certificates
   - certifi
+  - ipykernel
   - openssl
+  - odc-stac
+  - pystac-client

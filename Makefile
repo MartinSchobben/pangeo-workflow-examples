@@ -20,23 +20,28 @@ help:
 clean:
 	rm --force --recursive .ipynb_checkpoints/
 
-develop:
-	@echo "creating new base pangeo-workflow-examples conda environment..."
-	conda create -y -c conda-forge -n pangeo-workflow-examples python=3.10 pip mamba
+$(CONDA_ENV_DIR):
+	if ! { conda env list | grep 'pangeo-workflow-examples'; } >/dev/null 2>&1; then
+		@echo "creating new base pangeo-workflow-examples conda environment..."
+		conda create -y -c conda-forge -n pangeo-workflow-examples python=3.10 pip mamba eodag
+	fi;
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
-	mamba install -y -c conda-forge nbgitpuller jupyterlab eodag ipykernel 
+
+environment: $(CONDA_ENV_DIR)
+	@echo -e "conda environment is ready. To activate use:\n\tconda activate pangeo-workflow-examples"
+	$(CONDA_ACTIVATE) pangeo-workflow-examples
+	mamba env update --file environment.yml --prune
 
 publish:
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
-	mamba env export  --from-history | grep -ve "^prefix:" -ve "jupyterlab" -ve "nbgitpuller" > environment.yml
+	mamba env export  --from-history | grep -ve "^prefix:" -ve "jupyter" -ve "nbgitpuller" -ve "eodag" -ve "mamba" -ve "pip" > environment.yml
 
 kernel:
-	mamba env create -n pangeo-workflow-examples --file environment.yml
 	$(CONDA_ACTIVATE) pangeo-workflow-examples
 	cp -f /tmp/eodag.yml ${HOME}/.config/eodag/eodag.yml
 	cp -f /tmp/providers.yml $(EODAG_PATH)/eodag/resources/providers.yml
 	python -m ipykernel install --user --name pangeo-workflow-examples
 	@echo -e "conda jupyter kernel is ready."
 
-jupyter: kernel develop
+jupyter: kernel
 	jupyter lab .
